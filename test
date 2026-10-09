@@ -454,45 +454,656 @@ radial-gradient(circle at 50% 65%, rgba(255, 220, 0, 0.10), transparent 35%),
         <!-- =========================
              FORM
              ========================= -->
-        <form class="form-card" id="applicationForm">
+       
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <title>Apply to ZENTŌ COLLECTIVE</title>
 
-          <div class="question-number">
-            1
-          </div>
+  <style>
+    :root {
+      --yellow: #f8c641;
+      --black: #050505;
+      --white: #ffffff;
+      --muted: #a8a8a8;
+    }
 
-          <div class="question">
-            Are you already a day trader?
-            <span class="required">*</span>
-          </div>
+    * {
+      box-sizing: border-box;
+    }
 
-          <div class="options">
+    html {
+      scroll-behavior: smooth;
+    }
 
-            <label class="option">
-              <input
-                type="radio"
-                name="dayTrader"
-                value="yes"
-                required
-              >
-              Yes
-            </label>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 50% 44%, #292207 0%, #100e06 34%, var(--black) 70%);
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-            <label class="option">
-              <input
-                type="radio"
-                name="dayTrader"
-                value="no"
-              >
-              No
-            </label>
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 20px 0;
+    }
 
-          </div>
+    .top-line {
+      width: 105px;
+      height: 4px;
+      background: var(--yellow);
+      border-radius: 10px;
+      box-shadow: 0 0 18px #f8c64155;
+      margin-bottom: 57px;
+    }
 
-          <button class="next-button" type="submit">
+    header {
+      text-align: center;
+      max-width: 760px;
+      margin-bottom: 38px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 5vw, 49px);
+      line-height: 1.08;
+      font-weight: 800;
+      margin: 0 0 17px;
+      letter-spacing: -1px;
+    }
+
+    .highlight {
+      color: #ffd000;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: #a8a8a8;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .arrow {
+      color: var(--yellow);
+      font-size: 43px;
+      line-height: 1;
+      margin: 0 0 23px;
+    }
+
+    .form-card {
+      width: 100%;
+      max-width: 700px;
+      background: var(--white);
+      color: var(--black);
+      border-radius: 24px;
+      padding: 42px;
+      margin-bottom: 70px;
+      box-shadow: 0 15px 55px #00000050;
+    }
+
+    .progress-track {
+      height: 5px;
+      background: #eeeeee;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .progress-fill {
+      width: 14.2857%;
+      height: 100%;
+      background: var(--yellow);
+      transition: width 0.25s ease;
+    }
+
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      background: var(--black);
+      color: #ffd000;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    .step-count {
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 24px;
+      line-height: 1.35;
+      margin: 0 0 24px;
+      font-weight: 750;
+    }
+
+    .required {
+      font-size: 14px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 56px;
+      padding: 15px;
+      border: 1px solid #dedede;
+      border-radius: 11px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .option:hover {
+      border-color: #d5a51e;
+      background: #fffdf5;
+    }
+
+    .option:has(input:checked) {
+      border-color: #d9a91f;
+      background: #fff8df;
+    }
+
+    .option input {
+      accent-color: #c59a18;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0 0 9px;
+    }
+
+    .text-field {
+      width: 100%;
+      border: 1px solid #d7d7d7;
+      border-radius: 10px;
+      padding: 15px;
+      font: inherit;
+      font-size: 15px;
+      color: #111;
+      background: white;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .text-field:focus {
+      border-color: #d2a21c;
+      box-shadow: 0 0 0 3px #f8c64130;
+    }
+
+    textarea.text-field {
+      min-height: 145px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .field-help {
+      color: #777;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 9px;
+    }
+
+    .error {
+      display: none;
+      color: #b42318;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .error.visible {
+      display: block;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 11px;
+      min-height: 56px;
+      padding: 15px 20px;
+      font: inherit;
+      font-weight: 750;
+      font-size: 15px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    button:active {
+      transform: scale(0.99);
+    }
+
+    .continue {
+      flex: 1;
+      background: var(--yellow);
+      color: #050505;
+    }
+
+    .back {
+      background: #eeeeee;
+      color: #222;
+    }
+
+    .back[hidden] {
+      display: none;
+    }
+
+    .success {
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    .success-mark {
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 22px;
+      border-radius: 50%;
+      background: #fff4cb;
+      color: #785900;
+      font-size: 30px;
+    }
+
+    .success h2 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .success p {
+      color: #666;
+      line-height: 1.7;
+    }
+
+    footer {
+      color: #777;
+      text-align: center;
+      font-size: 12px;
+      margin-top: auto;
+      padding: 25px 10px 10px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 15px 14px 0;
+      }
+
+      .top-line {
+        margin-bottom: 43px;
+      }
+
+      header {
+        margin-bottom: 28px;
+      }
+
+      h1 {
+        letter-spacing: -0.6px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+      }
+
+      .form-card {
+        padding: 27px 22px;
+        border-radius: 19px;
+        margin-bottom: 45px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      .buttons {
+        flex-direction: column-reverse;
+      }
+
+      .back[hidden] {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="top-line"></div>
+
+    <header>
+      <h1>
+        Apply To Become Apart of<br>
+        The <span class="highlight">Collective</span>
+      </h1>
+      <p class="subtitle">Answer a few quick questions below.</p>
+    </header>
+
+    <div class="arrow" aria-hidden="true">↓</div>
+
+    <main class="form-card">
+      <div id="questionnaire">
+        <div class="progress-track"
+             role="progressbar"
+             aria-label="Application progress"
+             aria-valuemin="1"
+             aria-valuemax="7"
+             aria-valuenow="1"
+             id="progressTrack">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="step-count" id="stepCount">QUESTION 1 OF 7</div>
+        <div class="step-number" id="stepNumber">1</div>
+        <h2 id="questionTitle">Are you already a day trader?</h2>
+
+        <div id="answerArea"></div>
+
+        <p class="error" id="errorMessage" role="alert">
+          Please answer this question before continuing.
+        </p>
+
+        <div class="buttons">
+          <button type="button" class="back" id="backButton" hidden>
+            ← Back
+          </button>
+          <button type="button" class="continue" id="continueButton">
             Continue
           </button>
+        </div>
+      </div>
 
-        </form>
+      <section id="successScreen" class="success hidden" aria-live="polite">
+        <div class="success-mark">✓</div>
+        <h2>Application complete!</h2>
+        <p>
+          Thank you for your interest in ZENTŌ COLLECTIVE.
+          Your answers have been recorded in this session.
+        </p>
+        <p>
+          <strong>Important:</strong> your application has not been sent
+          to us yet. Submission delivery needs to be connected to a form
+          service before this page goes live.
+        </p>
+      </section>
+    </main>
+
+    <footer>© 2026 ZENTŌ COLLECTIVE. All rights reserved.</footer>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        title: "Are you already a day trader?",
+        type: "radio",
+        name: "dayTrader",
+        options: ["Yes", "No"]
+      },
+      {
+        title: "How long have you been trading?",
+        type: "radio",
+        name: "tradingDuration",
+        options: [
+          "0–6 months",
+          "6 months–1 year",
+          "1–3 years",
+          "3–5 years",
+          "5+ years"
+        ]
+      },
+      {
+        title: "Why do you want to learn to trade?",
+        type: "textarea",
+        name: "motivation",
+        placeholder: "Tell us why you want to learn to trade..."
+      },
+      {
+        title: "What's your biggest struggle in trading?",
+        type: "radio",
+        name: "biggestStruggle",
+        options: [
+          "Trading psychology",
+          "Lack of capital",
+          "Risk management",
+          "Finding my edge in the market",
+          "Other"
+        ]
+      },
+      {
+        title: "What's your first name?",
+        type: "text",
+        name: "firstName",
+        placeholder: "Enter your first name"
+      },
+      {
+        title: "What's your email address?",
+        type: "email",
+        name: "email",
+        placeholder: "you@example.com"
+      },
+      {
+        title: "What's your phone number?",
+        type: "tel",
+        name: "phone",
+        placeholder: "Enter your phone number"
+      }
+    ];
+
+    const answers = {};
+    let currentStep = 0;
+
+    const answerArea = document.getElementById("answerArea");
+    const questionTitle = document.getElementById("questionTitle");
+    const stepNumber = document.getElementById("stepNumber");
+    const stepCount = document.getElementById("stepCount");
+    const progressFill = document.getElementById("progressFill");
+    const progressTrack = document.getElementById("progressTrack");
+    const errorMessage = document.getElementById("errorMessage");
+    const backButton = document.getElementById("backButton");
+    const continueButton = document.getElementById("continueButton");
+
+    function renderQuestion() {
+      const question = questions[currentStep];
+
+      questionTitle.textContent = question.title;
+      stepNumber.textContent = currentStep + 1;
+      stepCount.textContent =
+        `QUESTION ${currentStep + 1} OF ${questions.length}`;
+
+      const progress = ((currentStep + 1) / questions.length) * 100;
+      progressFill.style.width = progress + "%";
+      progressTrack.setAttribute("aria-valuenow", currentStep + 1);
+
+      backButton.hidden = currentStep === 0;
+      continueButton.textContent =
+        currentStep === questions.length - 1
+          ? "Complete Application"
+          : "Continue";
+
+      errorMessage.classList.remove("visible");
+      answerArea.innerHTML = "";
+
+      if (question.type === "radio") {
+        const options = document.createElement("div");
+        options.className = "options";
+
+        question.options.forEach((option, index) => {
+          const label = document.createElement("label");
+          label.className = "option";
+
+          const input = document.createElement("input");
+          input.type = "radio";
+          input.name = question.name;
+          input.value = option;
+          input.required = true;
+          input.checked = answers[question.name] === option;
+
+          input.addEventListener("change", () => {
+            answers[question.name] = input.value;
+            errorMessage.classList.remove("visible");
+          });
+
+          const text = document.createElement("span");
+          text.textContent = option;
+
+          label.append(input, text);
+          options.appendChild(label);
+        });
+
+        answerArea.appendChild(options);
+      } else {
+        const input = document.createElement(
+          question.type === "textarea" ? "textarea" : "input"
+        );
+
+        input.className = "text-field";
+        input.name = question.name;
+        input.required = true;
+        input.placeholder = question.placeholder || "";
+        input.value = answers[question.name] || "";
+
+        if (question.type !== "textarea") {
+          input.type = question.type;
+          input.autocomplete =
+            question.type === "email" ? "email" :
+            question.type === "tel" ? "tel" : "given-name";
+        } else {
+          input.rows = 5;
+          input.maxLength = 2000;
+        }
+
+        input.addEventListener("input", () => {
+          answers[question.name] = input.value;
+          errorMessage.classList.remove("visible");
+        });
+
+        answerArea.appendChild(input);
+
+        if (question.type === "textarea") {
+          const help = document.createElement("p");
+          help.className = "field-help";
+          help.textContent = "Please share a little about your goals.";
+          answerArea.appendChild(help);
+        }
+      }
+    }
+
+    function validateCurrentQuestion() {
+      const question = questions[currentStep];
+      const value = answers[question.name];
+
+      if (typeof value !== "string" || !value.trim()) {
+        showError("This question is required. Please provide an answer.");
+        return false;
+      }
+
+      if (question.type === "email") {
+        const emailInput = answerArea.querySelector("input");
+        if (!emailInput.checkValidity()) {
+          showError("Please enter a valid email address.");
+          emailInput.focus();
+          return false;
+        }
+      }
+
+      if (question.type === "tel") {
+        const digits = value.replace(/\D/g, "");
+        if (digits.length < 7 || digits.length > 15) {
+          showError("Please enter a valid phone number.");
+          answerArea.querySelector("input").focus();
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.add("visible");
+    }
+
+    continueButton.addEventListener("click", () => {
+      // Capture the latest typed value before validating.
+      const question = questions[currentStep];
+      const field = answerArea.querySelector(
+        'textarea, input:not([type="radio"])'
+      );
+
+      if (field) {
+        answers[question.name] = field.value;
+      }
+
+      if (!validateCurrentQuestion()) return;
+
+      if (currentStep < questions.length - 1) {
+        currentStep++;
+        renderQuestion();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        document.getElementById("questionnaire").classList.add("hidden");
+        document.getElementById("successScreen").classList.remove("hidden");
+      }
+    });
+
+    backButton.addEventListener("click", () => {
+      const question = questions[currentStep];
+      const field = answerArea.querySelector(
+        'textarea, input:not([type="radio"])'
+      );
+
+      if (field) {
+        answers[question.name] = field.value;
+      }
+
+      if (currentStep > 0) {
+        currentStep--;
+        renderQuestion();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
 
       </div>
     </section>
